@@ -1,0 +1,18 @@
+{
+  "name": "filterwhere",
+  "description": "Filter resources with request parameters\n",
+  "author": "Thomas Jakobi <office@treehillstudio.com>",
+  "private": true,
+  "devDependencies": {
+    "grunt": "^1.4.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-string-replace": "^1.3.1"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead",
+    "ie >= 10"
+  ]
+}
