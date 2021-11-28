@@ -17,19 +17,7 @@ MODX Package Management
 
 ## Documentation
 
-@TODO
-
-In short: 
-
-```
-[[!FilterGetResourcesWhere?
-&fields=`{"search":"pagetitle,content,description::LIKE"}`
-]]
-```
-
-The snippet call will create a where clause to filter getResources/pdoResources
-results with the value of a search request key. The value of the search request
-key is set as placeholder in `<key>_value`
+For more information please read the documentation on https://jako.github.io/FilterWhere/
 
 ## GitHub Repository
 

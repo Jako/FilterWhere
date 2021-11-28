@@ -3,7 +3,7 @@
   "lowCaseName": "filterwhere",
   "description": "Filter resources with request parameters",
   "author": "Thomas Jakobi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "package": {
     "elements": {
       "snippets": [
@@ -25,6 +25,10 @@
             },
             {
               "name": "toPlaceholder",
+              "value": ""
+            },
+            {
+              "name": "varName",
               "value": ""
             }
           ]

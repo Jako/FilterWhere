@@ -2,9 +2,6 @@
 
 Filter resources with request parameters
 
-- Author: Thomas Jakobi <office@treehillstudio.com>
-- License: GNU GPLv2
-
 ## Features
 
 With this MODX Revolution package you can generate a xPDO where clause on base
@@ -15,6 +12,10 @@ getResources where property.
 
 MODX Package Management
 
+## Usage
+
+Install via package manager and create the crosslinks in the custom manager page.
+
 ## Documentation
 
-@TODO
+For more information please read the [documentation](https://jako.github.io/FilterWhere/).

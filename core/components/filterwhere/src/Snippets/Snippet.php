@@ -45,7 +45,7 @@ abstract class Snippet
      * @param modX $modx
      * @param array $properties
      */
-    public function __construct(modX $modx, $properties = [])
+    public function __construct(modX $modx, array $properties = [])
     {
         $this->modx =& $modx;
 
@@ -114,7 +114,7 @@ abstract class Snippet
      * @param $value
      * @return array|null
      */
-    protected function getAssociativeJson($value)
+    protected function getAssociativeJson($value): ?array
     {
         return json_decode($value, true);
     }
@@ -126,7 +126,7 @@ abstract class Snippet
      * @param string $separator
      * @return array
      */
-    protected function getExplodeSeparated($value, $separator = ','): array
+    protected function getExplodeSeparated($value, string $separator = ','): array
     {
         return (is_string($value) && $value !== '') ? array_map('trim', explode($separator, $value)) : [];
     }
