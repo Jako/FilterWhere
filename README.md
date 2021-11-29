@@ -14,7 +14,7 @@ MODX Package Management
 
 ## Usage
 
-Install via package manager and create the crosslinks in the custom manager page.
+Install via package manager and use the snippets in the package.
 
 ## Documentation
 
