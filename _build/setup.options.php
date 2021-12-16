@@ -2,7 +2,7 @@
 /**
  * Setup options
  *
- * @package anchorsaway
+ * @package filterwhere
  * @subpackage build
  *
  * @var array $options
