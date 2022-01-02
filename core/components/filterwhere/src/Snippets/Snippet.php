@@ -85,7 +85,7 @@ abstract class Snippet
                     $result[$parts[0]] = $this->{'get' . ucfirst($parts[1])}($this->modx->getOption($key, $properties, $value, true));
                 }
             } else {
-                $result[$parts[0]] = $this->modx->getOption($parts[0], $properties, $value, true);
+                $result[$parts[0]] = $this->modx->getOption($key, $properties, $value, true);
             }
             unset($properties[$key]);
         }
