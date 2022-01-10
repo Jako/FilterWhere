@@ -17,7 +17,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      *
      * @return array
      */
-    public function getDefaultProperties(): array
+    public function getDefaultProperties()
     {
         return [
             'fields::associativeJson' => '',
@@ -34,7 +34,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      * @return string
      * @throws /Exception
      */
-    public function execute(): string
+    public function execute()
     {
         $where = $this->getProperty('where');
         if ($where == false) {
@@ -90,7 +90,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
         return $output;
     }
 
-    public function getAllowedVarName($value): string
+    public function getAllowedVarName($value)
     {
         if (in_array(strtoupper($value), ['REQUEST', 'GET', 'POST'])) {
             return $value;
