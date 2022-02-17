@@ -5,8 +5,7 @@
   "private": true,
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-replace": "^1.1.3",
-    "gulp-watch": "^5.0.1"
+    "gulp-replace": "^1.1.3"
   },
   "browserslist": [
     "last 2 version",
