@@ -13,7 +13,6 @@ use TreehillStudio\FilterWhere\FilterWhere;
 
 /**
  * Class Snippet
- * @package FilterWhere
  */
 abstract class Snippet
 {
@@ -22,11 +21,13 @@ abstract class Snippet
      * @var modX $modx
      */
     protected $modx;
+
     /**
      * A reference to the FilterWhere instance
      * @var FilterWhere $filterwhere
      */
     protected $filterwhere;
+
     /**
      * The snippet properties
      * @var array $properties
@@ -45,12 +46,11 @@ abstract class Snippet
      * @param modX $modx
      * @param array $properties
      */
-    public function __construct(modX $modx, array $properties = [])
+    public function __construct(modX $modx, $properties = [])
     {
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('filterwhere.core_path', null, $this->modx->getOption('core_path') . 'components/filterwhere/');
-        /** @var FilterWhere $filterwhere */
         $this->filterwhere = $this->modx->getService('filterwhere', 'FilterWhere', $corePath . 'model/filterwhere/', [
             'core_path' => $corePath
         ]);
@@ -117,7 +117,7 @@ abstract class Snippet
      * @param $value
      * @return array|null
      */
-    protected function getAssociativeJson($value): ?array
+    protected function getAssociativeJson($value)
     {
         return json_decode($value, true);
     }
@@ -129,7 +129,7 @@ abstract class Snippet
      * @param string $separator
      * @return array
      */
-    protected function getExplodeSeparated($value, string $separator = ',')
+    protected function getExplodeSeparated($value, $separator = ',')
     {
         return (is_string($value) && $value !== '') ? array_map('trim', explode($separator, $value)) : [];
     }
