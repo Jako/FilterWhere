@@ -17,37 +17,37 @@ pkg.dependencies.forEach(function (dependency, index) {
     }
 });
 
-gulp.task('bump-copyright', function () {
+const bumpCopyright = function () {
     return gulp.src([
         'core/components/filterwhere/model/filterwhere/filterwhere.class.php',
         'core/components/filterwhere/src/FilterWhere.php',
     ], {base: './'})
         .pipe(replace(/Copyright 2021(-\d{4})? by/g, 'Copyright ' + (year > 2021 ? '2021-' : '') + year + ' by'))
         .pipe(gulp.dest('.'));
-});
-gulp.task('bump-version', function () {
+};
+const bumpVersion = function () {
     return gulp.src([
         'core/components/filterwhere/src/FilterWhere.php',
     ], {base: './'})
-        .pipe(replace(/version = '\d+.\d+.\d+[-a-z0-9]*'/ig, 'version = \'' + pkg.version + '\''))
+        .pipe(replace(/version = '\d+\.\d+\.\d+[-a-z0-9]*'/ig, 'version = \'' + pkg.version + '\''))
         .pipe(gulp.dest('.'));
-});
-gulp.task('bump-docs', function () {
+};
+const bumpDocs = function () {
     return gulp.src([
         'mkdocs.yml',
     ], {base: './'})
         .pipe(replace(/&copy; 2021(-\d{4})?/g, '&copy; ' + (year > 2021 ? '2021-' : '') + year))
         .pipe(gulp.dest('.'));
-});
-gulp.task('bump-requirements', function () {
+};
+const bumpRequirements = function () {
     return gulp.src([
         'docs/index.md',
     ], {base: './'})
         .pipe(replace(/[*-] MODX Revolution \d.\d.*/g, '* MODX Revolution ' + modxversion + '+'))
         .pipe(replace(/[*-] PHP (v)?\d.\d.*/g, '* PHP ' + phpversion + '+'))
         .pipe(gulp.dest('.'));
-});
-gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-docs', 'bump-requirements'));
+};
+gulp.task('bump', gulp.series(bumpCopyright, bumpVersion, bumpDocs, bumpRequirements));
 
 // Default Task
 gulp.task('default', gulp.series('bump'));
