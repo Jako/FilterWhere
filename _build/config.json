@@ -3,7 +3,7 @@
   "lowCaseName": "filterwhere",
   "description": "Filter resources with request parameters",
   "author": "Thomas Jakobi",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "package": {
     "elements": {
       "snippets": [
@@ -41,6 +41,16 @@
         "type": "combo-boolean",
         "area": "system",
         "value": "0"
+      },
+      {
+        "key": "google_maps_api_key",
+        "area": "geocode",
+        "value": ""
+      },
+      {
+        "key": "google_maps_region",
+        "area": "geocode",
+        "value": ""
       }
     ]
   },
@@ -58,11 +68,15 @@
     "readme": "docs/readme.md",
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
+    "options": {
+      "composer": true
+    },
     "setupOptions": {
       "source": "setup.options.php"
     },
     "resolver": {
       "after": [
+        "resolve.composer.php",
         "resolve.treehillstudio.php"
       ]
     }

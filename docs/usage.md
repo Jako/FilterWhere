@@ -15,13 +15,13 @@ work on the request values.
 
 The Snippet uses the following properties:
 
-Property | Description | Default
--------- | ----------- | -------
-fields | JSON encoded array of filter => resourcefield combinations. | -
-where | JSON encoded xPDO where clause to filter the resources. | -
-emptyRedirect | ID of a resource, the user is redirected to, when the generated where clause is empty. | -
-toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly. | -
-varName | Name of the superglobal variable that is searched for the filter values. | REQUEST
+| Property      | Description                                                                                        | Default |
+|---------------|----------------------------------------------------------------------------------------------------|---------|
+| fields        | JSON encoded array of filter => resourcefield combinations.                                        | -       |
+| where         | JSON encoded xPDO where clause to filter the resources.                                            | -       |
+| emptyRedirect | ID of a resource, the user is redirected to, when the generated where clause is empty.             | -       |
+| toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly. | -       |
+| varName       | Name of the superglobal variable that is searched for the filter values.                           | REQUEST |
 
 The fields property uses the following syntax:
 
@@ -42,3 +42,34 @@ The sanitized values of each request key is set as placeholder in `<key>_value`.
 
 Using the `where` property, you can combine the created where clause with an
 additional where clause created i.e. with `TaggerGetResourcesWhere`.
+
+## Example
+
+Create a form with a checkbox on a page and prepend it with a
+FilterGetResourcesWhere call:
+
+```
+[[!FilterGetResourcesWhere?
+&fields=`{ "resource":"alias::IN" }`
+&toPlaceholder=`resourceswhere`
+]]
+<form method="get" action="[[~[[*id]]]]">
+    <div>
+        <input type="checkbox" name="resource[]" value="foo" [[!+resource_value:FormItIsChecked=`foo`]]>
+        <label>Foo</label>
+    </div>
+    <div>
+        <input type="checkbox" name="resource[]" value="bar" [[!+resource_value:FormItIsChecked=`bar`]]>
+        <label>Bar</label>
+    </div>
+</form>
+```
+
+This form will filter a getResources snippet call showing resources with the aliases 'foo' and 'bar'.
+
+```
+[[!getResources?
+...
+&where=`[[!resourceswhere]]`
+]]
+```

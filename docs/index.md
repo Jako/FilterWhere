@@ -7,7 +7,7 @@ clause can i.e. be used as pdoRessources or getResources where property.
 ### Requirements
 
 * MODX Revolution 2.8+
-* PHP v7.2+
+* PHP 7.2+
 
 ### Features
 

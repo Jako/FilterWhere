@@ -2,7 +2,7 @@
 /**
  * FilterWhere classfile
  *
- * Copyright 2021 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2021-2023 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package filterwhere
  * @subpackage classfile
@@ -39,7 +39,7 @@ class FilterWhere
      * The version
      * @var string $version
      */
-    public $version = '1.0.1';
+    public $version = '1.1.0';
 
     /**
      * The class options
@@ -85,15 +85,18 @@ class FilterWhere
             'connectorUrl' => $assetsUrl . 'connector.php'
         ], $options);
 
-        // Add default options
-        $this->options = array_merge($this->options, [
-            'debug' => (bool)$this->getOption('debug', $options, false),
-            'modxversion' => $modxversion['version'],
-            'deeplAuthKey' => $this->modx->getOption($this->namespace . '.deepl_auth_key', null, ''),
-        ]);
-
         $lexicon = $this->modx->getService('lexicon', 'modLexicon');
         $lexicon->load($this->namespace . ':default');
+
+        $this->packageName = $this->modx->lexicon('filterwhere');
+
+        // Add default options
+        $this->options = array_merge($this->options, [
+            'debug' => $this->getBooleanOption('debug', [], false),
+            'modxversion' => $modxversion['version'],
+            'google_maps_api_key' => $this->modx->getOption($this->namespace . '.google_maps_api_key', [], ''),
+            'google_maps_region' => $this->modx->getOption($this->namespace . '.google_maps_region', [], ''),
+        ]);
     }
 
     /**
@@ -118,5 +121,19 @@ class FilterWhere
             }
         }
         return $option;
+    }
+
+    /**
+     * Get Boolean Option
+     *
+     * @param string $key
+     * @param array $options
+     * @param mixed $default
+     * @return bool
+     */
+    public function getBooleanOption($key, $options = [], $default = null)
+    {
+        $option = $this->getOption($key, $options, $default);
+        return ($option === 'true' || $option === true || $option === '1' || $option === 1);
     }
 }
