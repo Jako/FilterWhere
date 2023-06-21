@@ -22,7 +22,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      *
      * @return array
      */
-    public function getDefaultProperties(): array
+    public function getDefaultProperties()
     {
         return [
             'fields::associativeJson' => '',
@@ -40,7 +40,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      * @return string
      * @throws /Exception
      */
-    public function execute(): string
+    public function execute()
     {
         $where = $this->getProperty('where');
         if (!$where) {
@@ -285,13 +285,15 @@ class FilterGetResourcesWhereSnippet extends Snippet
                             $locality = $location->first()->getCoordinates();
                             $latitude = number_format($locality->getLatitude(), 10, '.', '');
                             $longitude = number_format($locality->getLongitude(), 10, '.', '');
-                            $where[] = ["ROUND(3959 * acos(" .
+                            $where[] = [
+                                "ROUND(3959 * acos(" .
                                 "cos(radians($latitude)) * " .
                                 "cos(radians($locationFields[0])) * " .
                                 "cos(radians($locationFields[1]) - radians($longitude)) + " .
                                 "sin(radians($latitude)) * " .
                                 "sin(radians($locationFields[0]))" .
-                                "), 2) < $distance"];
+                                "), 2) < $distance"
+                            ];
                         }
                     } catch (Exception $e) {
                         $where[] = ['0 = 1'];
