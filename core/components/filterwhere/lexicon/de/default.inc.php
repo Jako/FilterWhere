@@ -5,4 +5,4 @@
  * @package filterwhere
  * @subpackage lexicon
  */
-$_lang['filterwhere'] = '';
+$_lang['filterwhere'] = 'FilterWhere';
