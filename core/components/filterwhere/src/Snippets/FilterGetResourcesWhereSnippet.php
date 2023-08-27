@@ -146,6 +146,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
             }
         } else {
             $value = $this->modx->stripTags($value);
+            $value = htmlspecialchars($value);
         }
         return $value;
     }
