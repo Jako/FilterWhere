@@ -15,13 +15,14 @@ work on the request values.
 
 The Snippet uses the following properties:
 
-| Property      | Description                                                                                        | Default |
-|---------------|----------------------------------------------------------------------------------------------------|---------|
-| fields        | JSON encoded array of filter => resourcefield combinations.                                        | -       |
-| where         | JSON encoded xPDO where clause to filter the resources.                                            | -       |
-| emptyRedirect | ID of a resource, the user is redirected to, when the generated where clause is empty.             | -       |
-| toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly. | -       |
-| varName       | Name of the superglobal variable that is searched for the filter values.                           | REQUEST |
+| Property      | Description                                                                                              | Default |
+|---------------|----------------------------------------------------------------------------------------------------------|---------|
+| emptyRedirect | ID of a resource, the user is redirected to, when the generated where clause is empty.                   | -       |
+| fields        | JSON encoded array of ‘filter => resourcefield’ combinations.                                            | -       |
+| toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly.       | -       |
+| type          | Type of the xPDO clause to filter the resources. Can be set to ‘where’ or ‘having’. Defaults to ‘where’. | where   |
+| varName       | Name of the superglobal variable that is searched for the filter values.                                 | REQUEST |
+| where         | JSON encoded xPDO where clause to filter the resources.                                                  | -       |
 
 The fields property uses the following syntax:
 
@@ -43,10 +44,35 @@ The sanitized values of each request key is set as placeholder in `<key>_value`.
 Using the `where` property, you can combine the created where clause with an
 additional where clause created i.e. with `TaggerGetResourcesWhere`.
 
-## Example
+## Operators
 
-Create a form with a checkbox on a page and prepend it with a
-FilterGetResourcesWhere call:
+FilterWhere can use the default xPDO operators like 
+
+`=`, `>`, `<`, `>=`, `<=`, `!=`, `LIKE` and `IN`
+
+If the operator `LIKE` is used, the query value is surrounded with `%`. If the
+operator `IN` is used, you maybe have to surround each requested value with
+quotes, if request values are not an array.
+
+There are some additional operators available with FilterWhere:
+
+- `RANGE`: The requested value is separated at a `-` sign. The first part is used 
+as the start of the range and the last part as the end of the range.
+- `DATE`: The requested value will be used as [valid date/time
+string](https://www.php.net/manual/en/datetime.formats.php). The resulting value
+will be used as the start of a date range. The value plus one day will be used
+as the end of a date range.
+- `GEOCODE`: The requested value will be geocoded with Google Maps Geocoding
+(the API Key has to be set in the system settings). The distance from the
+resulting value to the location given by two values in the resource (lat/lng
+separated by `||`) is calculated. This distance has to be smaller than the
+requested `distance` value.
+
+## Examples
+
+### In Array
+
+Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
 ```
 [[!FilterGetResourcesWhere?
@@ -65,7 +91,65 @@ FilterGetResourcesWhere call:
 </form>
 ```
 
-This form will filter a getResources snippet call showing resources with the aliases 'foo' and 'bar'.
+This form will filter a getResources snippet call showing only resources with
+the `alias` 'foo' and/or 'bar', if one checkbox is enabled.
+
+### Range
+
+Create a form on a page and prepend it with a FilterGetResourcesWhere call:
+
+```
+[[!FilterGetResourcesWhere?
+&fields=`{ "count":"count::RANGE" }`
+&toPlaceholder=`resourceswhere`
+]]
+<form method="get" action="[[~[[*id]]]]">
+    <div>
+        <input type="checkbox" name="count" value="0-2" [[!+count_value:eq=`0-2`:then=`checked`:else=``]]>
+        <label>Count 0-2</label>
+    </div>
+    <div>
+        <input type="checkbox" name="count" value="2-4" [[!+count_value:eq=`2-4`:then=`checked`:else=``]]>
+        <label>Count 2-4</label>
+    </div>
+    <div>
+        <input type="checkbox" name="count" value="4-" [[!+count_value:eq=`4-`:then=`checked`:else=``]]>
+        <label>Count 4+</label>
+    </div>    						
+</form>
+```
+
+This form will filter a getResources snippet call showing resources if the TV
+value `count` is inside the range, if one checkbox is enabled.
+
+### Geocode
+
+Create a form on a page and prepend it with a FilterGetResourcesWhere call:
+
+```
+[[!FilterGetResourcesWhere?
+&fields=`{ "geolocation":"lat||lng::GEOCODE" }`
+&toPlaceholder=`resourceswhere`
+]]
+<form method="get" action="[[~[[*id]]]]">
+    <div>
+        <input type="text" name="geolocation" value="[[!+geolocation_value]]">
+        <select name="distance">
+            <option selected="true" disabled [[!+distance_value:FormItIsSelected=``]]>Distance</option>
+            <option value="5" [[!+distance_value:FormItIsSelected=`5`]]>5 km</option>
+            <option value="10" [[!+distance_value:FormItIsSelected=`10`]]>10 km</option>
+            <option value="25" [[!+distance_value:FormItIsSelected=`25`]]>25 km</option>
+            <option value="50" [[!+distance_value:FormItIsSelected=`50`]]>50 km</option>
+        </select>
+    </div>    						
+</form>
+```
+
+This form will filter a getResources snippet call showing resources with a max
+distance around the geocoded value, if the geocoded value is has a result and
+the distance is set. Otherwise, the result is empty.
+
+All forms use the following getResources snippet call.
 
 ```
 [[!getResources?

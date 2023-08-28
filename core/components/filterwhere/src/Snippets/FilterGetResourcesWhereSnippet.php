@@ -275,6 +275,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
                             $field . ':<' => $end->format('Y-m-d H:i:s')
                         ];
                     } catch (Exception $e) {
+                        $where[] = ['0 = 1'];
                     }
                 } elseif ($operator == ':GEOCODE') {
                     $geolocation = new Geocode($this->modx);

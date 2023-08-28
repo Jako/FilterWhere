@@ -12,6 +12,9 @@
   "config": {
     "platform": {
       "php": "7.4"
+    },
+    "allow-plugins": {
+      "php-http/discovery": true
     }
   },
   "require": {

@@ -22,3 +22,26 @@ For more information please read the documentation on https://jako.github.io/Fil
 ## GitHub Repository
 
 https://github.com/Jako/FilterWhere
+
+## Third party licenses
+
+This extra includes third party software, for which we are thankful.
+
+* clue/stream-filter v1.6.0 [MIT]
+* geocoder-php/common-http 4.5.0 [MIT]
+* geocoder-php/google-maps-provider 4.7.1 [MIT]
+* guzzlehttp/guzzle 7.8.0 [MIT]
+* guzzlehttp/promises 2.0.1 [MIT]
+* guzzlehttp/psr7 2.6.1 [MIT]
+* php-http/discovery 1.19.1 [MIT]
+* php-http/guzzle7-adapter 1.0.0 [MIT]
+* php-http/httplug 2.4.0 [MIT]
+* php-http/message 1.16.0 [MIT]
+* php-http/message-factory 1.1.0 [MIT]
+* php-http/promise 1.1.0 [MIT]
+* psr/http-client 1.0.2 [MIT]
+* psr/http-factory 1.0.2 [MIT]
+* psr/http-message 1.1 [MIT]
+* ralouphie/getallheaders 3.0.3 [MIT]
+* symfony/deprecation-contracts v2.5.2 [MIT]
+* willdurand/geocoder 4.6.0 [MIT]
