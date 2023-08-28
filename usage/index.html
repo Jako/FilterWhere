@@ -313,9 +313,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
+  <a href="#operators" class="md-nav__link">
+    Operators
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-array" class="md-nav__link">
+    In Array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#range" class="md-nav__link">
+    Range
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geocode" class="md-nav__link">
+    Geocode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -394,9 +428,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
+  <a href="#operators" class="md-nav__link">
+    Operators
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-array" class="md-nav__link">
+    In Array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#range" class="md-nav__link">
+    Range
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geocode" class="md-nav__link">
+    Geocode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -441,18 +509,13 @@ work on the request values.</p>
 </thead>
 <tbody>
 <tr>
-<td>fields</td>
-<td>JSON encoded array of filter =&gt; resourcefield combinations.</td>
-<td>-</td>
-</tr>
-<tr>
-<td>where</td>
-<td>JSON encoded xPDO where clause to filter the resources.</td>
-<td>-</td>
-</tr>
-<tr>
 <td>emptyRedirect</td>
 <td>ID of a resource, the user is redirected to, when the generated where clause is empty.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>JSON encoded array of ‘filter =&gt; resourcefield’ combinations.</td>
 <td>-</td>
 </tr>
 <tr>
@@ -461,9 +524,19 @@ work on the request values.</p>
 <td>-</td>
 </tr>
 <tr>
+<td>type</td>
+<td>Type of the xPDO clause to filter the resources. Can be set to ‘where’ or ‘having’. Defaults to ‘where’.</td>
+<td>where</td>
+</tr>
+<tr>
 <td>varName</td>
 <td>Name of the superglobal variable that is searched for the filter values.</td>
 <td>REQUEST</td>
+</tr>
+<tr>
+<td>where</td>
+<td>JSON encoded xPDO where clause to filter the resources.</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -481,9 +554,29 @@ in an xPDO where clause.</p>
 <p>The sanitized values of each request key is set as placeholder in <code>&lt;key&gt;_value</code>.</p>
 <p>Using the <code>where</code> property, you can combine the created where clause with an
 additional where clause created i.e. with <code>TaggerGetResourcesWhere</code>.</p>
-<h2 id="example">Example</h2>
-<p>Create a form with a checkbox on a page and prepend it with a
-FilterGetResourcesWhere call:</p>
+<h2 id="operators">Operators</h2>
+<p>FilterWhere can use the default xPDO operators like </p>
+<p><code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>, <code>LIKE</code> and <code>IN</code></p>
+<p>If the operator <code>LIKE</code> is used, the query value is surrounded with <code>%</code>. If the
+operator <code>IN</code> is used, you maybe have to surround each requested value with
+quotes, if request values are not an array.</p>
+<p>There are some additional operators available with FilterWhere:</p>
+<ul>
+<li><code>RANGE</code>: The requested value is separated at a <code>-</code> sign. The first part is used 
+as the start of the range and the last part as the end of the range.</li>
+<li><code>DATE</code>: The requested value will be used as <a href="https://www.php.net/manual/en/datetime.formats.php">valid date/time
+string</a>. The resulting value
+will be used as the start of a date range. The value plus one day will be used
+as the end of a date range.</li>
+<li><code>GEOCODE</code>: The requested value will be geocoded with Google Maps Geocoding
+(the API Key has to be set in the system settings). The distance from the
+resulting value to the location given by two values in the resource (lat/lng
+separated by <code>||</code>) is calculated. This distance has to be smaller than the
+requested <code>distance</code> value.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<h3 id="in-array">In Array</h3>
+<p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
 <div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
 &amp;fields=`{ &quot;resource&quot;:&quot;alias::IN&quot; }`
 &amp;toPlaceholder=`resourceswhere`
@@ -499,7 +592,54 @@ FilterGetResourcesWhere call:</p>
     &lt;/div&gt;
 &lt;/form&gt;
 </code></pre></div>
-<p>This form will filter a getResources snippet call showing resources with the aliases 'foo' and 'bar'.</p>
+<p>This form will filter a getResources snippet call showing only resources with
+the <code>alias</code> 'foo' and/or 'bar', if one checkbox is enabled.</p>
+<h3 id="range">Range</h3>
+<p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
+<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
+&amp;fields=`{ &quot;count&quot;:&quot;count::RANGE&quot; }`
+&amp;toPlaceholder=`resourceswhere`
+]]
+&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;count&quot; value=&quot;0-2&quot; [[!+count_value:eq=`0-2`:then=`checked`:else=``]]&gt;
+        &lt;label&gt;Count 0-2&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;count&quot; value=&quot;2-4&quot; [[!+count_value:eq=`2-4`:then=`checked`:else=``]]&gt;
+        &lt;label&gt;Count 2-4&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;checkbox&quot; name=&quot;count&quot; value=&quot;4-&quot; [[!+count_value:eq=`4-`:then=`checked`:else=``]]&gt;
+        &lt;label&gt;Count 4+&lt;/label&gt;
+    &lt;/div&gt;                          
+&lt;/form&gt;
+</code></pre></div>
+<p>This form will filter a getResources snippet call showing resources if the TV
+value <code>count</code> is inside the range, if one checkbox is enabled.</p>
+<h3 id="geocode">Geocode</h3>
+<p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
+<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
+&amp;fields=`{ &quot;geolocation&quot;:&quot;lat||lng::GEOCODE&quot; }`
+&amp;toPlaceholder=`resourceswhere`
+]]
+&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;text&quot; name=&quot;geolocation&quot; value=&quot;[[!+geolocation_value]]&quot;&gt;
+        &lt;select name=&quot;distance&quot;&gt;
+            &lt;option selected=&quot;true&quot; disabled [[!+distance_value:FormItIsSelected=``]]&gt;Distance&lt;/option&gt;
+            &lt;option value=&quot;5&quot; [[!+distance_value:FormItIsSelected=`5`]]&gt;5 km&lt;/option&gt;
+            &lt;option value=&quot;10&quot; [[!+distance_value:FormItIsSelected=`10`]]&gt;10 km&lt;/option&gt;
+            &lt;option value=&quot;25&quot; [[!+distance_value:FormItIsSelected=`25`]]&gt;25 km&lt;/option&gt;
+            &lt;option value=&quot;50&quot; [[!+distance_value:FormItIsSelected=`50`]]&gt;50 km&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;                          
+&lt;/form&gt;
+</code></pre></div>
+<p>This form will filter a getResources snippet call showing resources with a max
+distance around the geocoded value, if the geocoded value is has a result and
+the distance is set. Otherwise, the result is empty.</p>
+<p>All forms use the following getResources snippet call.</p>
 <div class="highlight"><pre><span></span><code>[[!getResources?
 ...
 &amp;where=`[[!resourceswhere]]`
