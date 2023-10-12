@@ -66,7 +66,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
         $idx = 0;
         foreach ($fields as $key => $field) {
             $field = explode('::', $field);
-            $value = $this->getProperty($key, $this->modx->getOption($key, $this->values, false));
+            $value = $this->modx->getOption($key, $this->values, false);
             $phValue = ($value) ? $this->stripTags($value) : '';
             if ($type == 'having') {
                 $operator = $field[1] ?: '=';
