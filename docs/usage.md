@@ -154,6 +154,6 @@ All forms use the following getResources snippet call.
 ```
 [[!getResources?
 ...
-&where=`[[!resourceswhere]]`
+&where=`[[!+resourceswhere]]`
 ]]
 ```
