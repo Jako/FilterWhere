@@ -1,4 +1,4 @@
-[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/filterwhere/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/filterwhere/standard/)
+[![Default Lexicon](https://hosted.weblate.org/widget/modx-extras/filterwhere/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/filterwhere/standard/)
 
 # FilterWhere
 
