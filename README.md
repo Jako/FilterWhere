@@ -1,4 +1,4 @@
-[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/-/modx-filterwhere-standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/modx-filterwhere-standard/)
+[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/filterwhere/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/filterwhere/standard/)
 
 # FilterWhere
 
@@ -28,4 +28,4 @@ The project is licensed under the [GPLv2 license](https://github.com/Jako/Filter
 
 ## Translations
 
-Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-filterwhere-standard/), the [Properties Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-filterwhere-properties/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-filterwhere-system-settings/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/filterwhere/standard/), the [Properties Lexicon](https://hosted.weblate.org/projects/modx-extras/filterwhere/properties/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/filterwhere/system-settings/)
