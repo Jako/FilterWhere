@@ -386,6 +386,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Operators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operator-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operator Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -417,6 +432,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#daterange" class="md-nav__link">
+    <span class="md-ellipsis">
+      Daterange
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#geocode" class="md-nav__link">
     <span class="md-ellipsis">
       Geocode
@@ -427,6 +451,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Settings
+    </span>
+  </a>
   
 </li>
       
@@ -522,6 +555,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Operators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operator-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operator Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -553,6 +601,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#daterange" class="md-nav__link">
+    <span class="md-ellipsis">
+      Daterange
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#geocode" class="md-nav__link">
     <span class="md-ellipsis">
       Geocode
@@ -563,6 +620,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Settings
+    </span>
+  </a>
   
 </li>
       
@@ -617,6 +683,11 @@ work on the request values.</p>
 <td>-</td>
 </tr>
 <tr>
+<td>options</td>
+<td>JSON encoded array of filter operator options.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>toPlaceholder</td>
 <td>If set, the snippet result will be assigned to this placeholder instead of outputting it directly.</td>
 <td>-</td>
@@ -660,18 +731,57 @@ operator <code>IN</code> is used, you maybe have to surround each requested valu
 quotes, if request values are not an array.</p>
 <p>There are some additional operators available with FilterWhere:</p>
 <ul>
-<li><code>RANGE</code>: The requested value is separated at a <code>-</code> sign. The first part is used 
-as the start of the range and the last part as the end of the range.</li>
-<li><code>DATE</code>: The requested value will be used as <a href="https://www.php.net/manual/en/datetime.formats.php">valid date/time
-string</a>. The resulting value
-will be used as the start of a date range. The value plus one day will be used
-as the end of a date range.</li>
-<li><code>GEOCODE</code>: The requested value will be geocoded with Google Maps Geocoding
-(the API Key has to be set in the system settings). The distance from the
-resulting value to the location given by two values in the resource (lat/lng
-separated by <code>||</code>) is calculated. This distance has to be smaller than the
-requested <code>distance</code> value.</li>
+<li>
+<p><code>RANGE</code>: The requested value is separated at a <code>-</code> sign. The first part is used 
+  as the start of the range and the last part as the end of the range.</p>
+</li>
+<li>
+<p><code>DATE</code>: The requested value will be parsed as <a href="https://www.php.net/manual/en/datetime.formats.php">valid date/time
+  string</a>. The resulting
+  value will be used as the start of a date range. The value plus one day will
+  be used as the end of a date range. The start and end date can be formatted
+  with the <code>dateformat</code> option or set to <code>unixtime</code>.</p>
+</li>
+<li>
+<p><code>DATERANGE</code>: The requested value will be separated by a string referenced in
+  the <code>daterangeseparator</code> option. The two parts are parsed as <a href="https://www.php.net/manual/en/datetime.formats.php">valid date/time
+  string</a>. The resulting
+  first two values will be used as the start and the end of a date range. The
+  start and end date can be formatted with the <code>dateformat</code> option or set to
+  <code>unixtime</code>.</p>
+</li>
+<li>
+<p><code>GEOCODE</code>: The requested value will be geocoded with Google Maps Geocoding
+  (the API Key has to be set in the system settings). The distance from the
+  resulting value to the location given by two values in the resource (lat/lng
+  separated by <code>||</code>) is calculated. This distance has to be smaller than the
+  requested <code>distance</code> value.</p>
+</li>
 </ul>
+<h3 id="operator-options">Operator Options</h3>
+<p>FilterGetResourcesWhere uses the following operator options in a JSON encoded
+value in the <code>options</code> property:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>daterangeseparator</td>
+<td>The string, the requested value is separated with when the <code>DATERANGE</code> operator is used.</td>
+<td><code>-</code></td>
+</tr>
+<tr>
+<td>dateformat</td>
+<td>The values in start and end date can be formatted with the <code>dateformat</code> option or set to <code>unixtime</code>.</td>
+<td><code>Y-m-d H:i:s</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="examples">Examples</h2>
 <h3 id="in-array">In Array</h3>
 <p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
@@ -715,6 +825,23 @@ the <code>alias</code> 'foo' and/or 'bar', if one checkbox is enabled.</p>
 </code></pre></div>
 <p>This form will filter a getResources snippet call showing resources if the TV
 value <code>count</code> is inside the range, if one checkbox is enabled.</p>
+<h3 id="daterange">Daterange</h3>
+<p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
+<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
+&amp;fields=`{ &quot;daterange&quot;:&quot;publishedon::DATERANGE&quot; }`
+&amp;options=`{ &quot;daterangeseparator&quot;:&quot; - &quot;, &quot;dateformat&quot;:&quot;unixtime&quot; }`
+&amp;toPlaceholder=`resourceswhere`
+]]
+&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;text&quot; name=&quot;daterange&quot; value=&quot;[[!+daterange_value]]&quot;&gt;
+        &lt;label&gt;Daterange&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre></div>
+<p>This form will filter a getResources snippet call showing resources in the
+daterange set in the daterange input (Example value: <code>2023-12-01 - 2023-12-30</code>).</p>
+<p>If the second part of the daterange is not set, the range has no end.</p>
 <h3 id="geocode">Geocode</h3>
 <p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
 <div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
@@ -743,6 +870,38 @@ the distance is set. Otherwise, the result is empty.</p>
 &amp;where=`[[!+resourceswhere]]`
 ]]
 </code></pre></div>
+<h2 id="system-settings">System Settings</h2>
+<p>FilterWhere uses the following system settings in the namespace <code>filterwhere</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Name</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filterwhere.debug</td>
+<td>Debug</td>
+<td>Log debug information in the MODX error log.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>filterwhere.google_maps_api_key</td>
+<td>Google Maps Geocoding API Key</td>
+<td><a href="https://developers.google.com/maps/documentation/javascript/get-api-key">Request</a> a Google Maps API Key with enabled Geocoding API.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>filterwhere.google_maps_region</td>
+<td>Google Maps API Region Code Biasing</td>
+<td><a href="https://developers.google.com/maps/documentation/javascript/geocoding#GeocodingRegionCodes">Preferred region</a> for the geocoding result.</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -774,7 +933,7 @@ the distance is set. Otherwise, the result is empty.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      &copy; 2021-2023 <a href="https://treehillstudio.com">Treehill Studio</a>
+      &copy; 2021-2024 <a href="https://treehillstudio.com">Treehill Studio</a>
     </div>
   
   
