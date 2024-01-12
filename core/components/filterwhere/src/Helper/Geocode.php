@@ -9,6 +9,8 @@
 namespace TreehillStudio\FilterWhere\Helper;
 
 use FilterWhere;
+use Geocoder\Collection;
+use Geocoder\Exception\Exception;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
@@ -45,10 +47,10 @@ class Geocode
 
     /**
      * @param $address
-     * @return \Geocoder\Collection
-     * @throws \Geocoder\Exception\Exception
+     * @return Collection
+     * @throws Exception
      */
-    public function geocode($address)
+    public function geocode($address): Collection
     {
         $httpClient = new Client();
         $provider = new GoogleMaps($httpClient, $this->filterwhere->getOption('google_maps_region'), $this->filterwhere->getOption('google_maps_api_key'));

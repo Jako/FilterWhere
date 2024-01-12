@@ -19,6 +19,7 @@ The Snippet uses the following properties:
 |---------------|----------------------------------------------------------------------------------------------------------|---------|
 | emptyRedirect | ID of a resource, the user is redirected to, when the generated where clause is empty.                   | -       |
 | fields        | JSON encoded array of ‘filter => resourcefield’ combinations.                                            | -       |
+| options       | JSON encoded array of filter operator options.                                                           | -       |
 | toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly.       | -       |
 | type          | Type of the xPDO clause to filter the resources. Can be set to ‘where’ or ‘having’. Defaults to ‘where’. | where   |
 | varName       | Name of the superglobal variable that is searched for the filter values.                                 | REQUEST |
@@ -57,16 +58,37 @@ quotes, if request values are not an array.
 There are some additional operators available with FilterWhere:
 
 - `RANGE`: The requested value is separated at a `-` sign. The first part is used 
-as the start of the range and the last part as the end of the range.
-- `DATE`: The requested value will be used as [valid date/time
-string](https://www.php.net/manual/en/datetime.formats.php). The resulting value
-will be used as the start of a date range. The value plus one day will be used
-as the end of a date range.
+  as the start of the range and the last part as the end of the range.
+
+- `DATE`: The requested value will be parsed as [valid date/time
+  string](https://www.php.net/manual/en/datetime.formats.php). The resulting
+  value will be used as the start of a date range. The value plus one day will
+  be used as the end of a date range. The start and end date can be formatted
+  with the `dateformat` option or set to `unixtime`.
+
+- `DATERANGE`: The requested value will be separated by a string referenced in
+  the `daterangeseparator` option. The two parts are parsed as [valid date/time
+  string](https://www.php.net/manual/en/datetime.formats.php). The resulting
+  first two values will be used as the start and the end of a date range. The
+  start and end date can be formatted with the `dateformat` option or set to
+  `unixtime`.
+
 - `GEOCODE`: The requested value will be geocoded with Google Maps Geocoding
-(the API Key has to be set in the system settings). The distance from the
-resulting value to the location given by two values in the resource (lat/lng
-separated by `||`) is calculated. This distance has to be smaller than the
-requested `distance` value.
+  (the API Key has to be set in the system settings). The distance from the
+  resulting value to the location given by two values in the resource (lat/lng
+  separated by `||`) is calculated. This distance has to be smaller than the
+  requested `distance` value.
+
+### Operator Options
+
+FilterGetResourcesWhere uses the following operator options in a JSON encoded
+value in the `options` property:
+
+| Option             | Description                                                                                          | Default       |
+|--------------------|------------------------------------------------------------------------------------------------------|---------------|
+| daterangeseparator | The string, the requested value is separated with when the `DATERANGE` operator is used.             | `-`           |
+| dateformat         | The values in start and end date can be formatted with the `dateformat` option or set to `unixtime`. | `Y-m-d H:i:s` |
+
 
 ## Examples
 
@@ -122,6 +144,29 @@ Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 This form will filter a getResources snippet call showing resources if the TV
 value `count` is inside the range, if one checkbox is enabled.
 
+### Daterange
+
+Create a form on a page and prepend it with a FilterGetResourcesWhere call:
+
+```
+[[!FilterGetResourcesWhere?
+&fields=`{ "daterange":"publishedon::DATERANGE" }`
+&options=`{ "daterangeseparator":" - ", "dateformat":"unixtime" }`
+&toPlaceholder=`resourceswhere`
+]]
+<form method="get" action="[[~[[*id]]]]">
+    <div>
+        <input type="text" name="daterange" value="[[!+daterange_value]]">
+        <label>Daterange</label>
+    </div>
+</form>
+```
+
+This form will filter a getResources snippet call showing resources in the
+daterange set in the daterange input (Example value: `2023-12-01 - 2023-12-30`).
+
+If the second part of the daterange is not set, the range has no end.
+
 ### Geocode
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
@@ -157,3 +202,13 @@ All forms use the following getResources snippet call.
 &where=`[[!+resourceswhere]]`
 ]]
 ```
+
+## System Settings
+
+FilterWhere uses the following system settings in the namespace `filterwhere`:
+
+| Key                             | Name                                | Description                                                                                                                              | Default |
+|---------------------------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| filterwhere.debug               | Debug                               | Log debug information in the MODX error log.                                                                                             | No      |
+| filterwhere.google_maps_api_key | Google Maps Geocoding API Key       | [Request](https://developers.google.com/maps/documentation/javascript/get-api-key) a Google Maps API Key with enabled Geocoding API.     | -       |
+| filterwhere.google_maps_region  | Google Maps API Region Code Biasing | [Preferred region](https://developers.google.com/maps/documentation/javascript/geocoding#GeocodingRegionCodes) for the geocoding result. | -       |

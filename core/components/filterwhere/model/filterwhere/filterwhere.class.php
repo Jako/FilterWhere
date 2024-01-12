@@ -2,7 +2,7 @@
 /**
  * FilterWhere
  *
- * Copyright 2021-2023 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2021-2024 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package filterwhere
  * @subpackage classfile

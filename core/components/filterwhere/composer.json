@@ -19,6 +19,7 @@
   },
   "require": {
     "php": ">=7.4",
+    "ext-json": "*",
     "geocoder-php/google-maps-provider": "^4.5",
     "guzzlehttp/guzzle": "^7.5",
     "php-http/guzzle7-adapter": "^1.0",
