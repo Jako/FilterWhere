@@ -15,9 +15,7 @@ use xPDO;
 
 class FilterGetResourcesWhereSnippet extends Snippet
 {
-    /**
-     * @var array $values
-     */
+    /** @var array $values */
     public $values;
 
     /**
@@ -323,6 +321,9 @@ class FilterGetResourcesWhereSnippet extends Snippet
             }
             $this->modx->setPlaceholder('distance_value', $distance);
         } catch (\Geocoder\Exception\Exception $e) {
+            if ($this->filterwhere->getOption('debug')) {
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Geocoder issue: ' . $e->getMessage());
+            }
             $having = $junction . ' 0 = 1';
         }
         return $having;
@@ -520,6 +521,9 @@ class FilterGetResourcesWhereSnippet extends Snippet
                 $where = [];
             }
         } catch (\Geocoder\Exception\Exception $e) {
+            if ($this->filterwhere->getOption('debug')) {
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Geocoder issue: ' . $e->getMessage());
+            }
             $where = ['0 = 1'];
         }
         $this->modx->setPlaceholder('distance_value', $distance);

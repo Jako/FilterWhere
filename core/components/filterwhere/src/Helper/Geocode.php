@@ -50,7 +50,7 @@ class Geocode
      * @return Collection
      * @throws Exception
      */
-    public function geocode($address): Collection
+    public function geocode($address)
     {
         $httpClient = new Client();
         $provider = new GoogleMaps($httpClient, $this->filterwhere->getOption('google_maps_region'), $this->filterwhere->getOption('google_maps_api_key'));
