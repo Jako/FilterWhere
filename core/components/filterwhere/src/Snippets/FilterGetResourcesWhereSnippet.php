@@ -509,7 +509,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
                 $latitude = number_format($locality->getLatitude(), 10, '.', '');
                 $longitude = number_format($locality->getLongitude(), 10, '.', '');
                 $where = [
-                    "rtrim($junction, ':') ROUND(3959 * acos(" .
+                    rtrim($junction, ':') ." ROUND(3959 * acos(" .
                     "cos(radians($latitude)) * " .
                     "cos(radians($locationFields[0])) * " .
                     "cos(radians($locationFields[1]) - radians($longitude)) + " .
