@@ -27,7 +27,7 @@ The Snippet uses the following properties:
 
 The fields property uses the following syntax:
 
-```
+```json
 {"<request_key>":"<resource_fields>::<operator>::<junction>"}
 ```
 
@@ -96,7 +96,7 @@ value in the `options` property:
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
-```
+```html
 [[!FilterGetResourcesWhere?
 &fields=`{ "resource":"alias::IN" }`
 &toPlaceholder=`resourceswhere`
@@ -120,7 +120,7 @@ the `alias` 'foo' and/or 'bar', if one checkbox is enabled.
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
-```
+```html
 [[!FilterGetResourcesWhere?
 &fields=`{ "count":"count::RANGE" }`
 &toPlaceholder=`resourceswhere`
@@ -148,7 +148,7 @@ value `count` is inside the range, if one checkbox is enabled.
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
-```
+```html
 [[!FilterGetResourcesWhere?
 &fields=`{ "daterange":"publishedon::DATERANGE" }`
 &options=`{ "daterangeseparator":" - ", "dateformat":"unixtime" }`
@@ -171,7 +171,7 @@ If the second part of the daterange is not set, the range has no end.
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
-```
+```html
 [[!FilterGetResourcesWhere?
 &fields=`{ "geolocation":"lat||lng::GEOCODE" }`
 &toPlaceholder=`resourceswhere`
@@ -196,7 +196,7 @@ the distance is set. Otherwise, the result is empty.
 
 All forms use the following getResources snippet call.
 
-```
+```html
 [[!getResources?
 ...
 &where=`[[!+resourceswhere]]`
