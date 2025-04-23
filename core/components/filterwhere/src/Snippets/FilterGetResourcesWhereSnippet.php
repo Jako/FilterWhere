@@ -398,6 +398,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      */
     private function whereLike(string $junction, string $field, string $operator, string $value): array
     {
+        $value = str_replace(' ', '%', $value);
         return [$junction . $field . $operator => '%' . $value . '%'];
     }
 
