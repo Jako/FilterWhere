@@ -72,11 +72,11 @@ class FilterGetResourcesWhereSnippet extends Snippet
             $phValue = ($value) ? $this->stripTags($value) : '';
             if ($type == 'having') {
                 $operator = $field[1] ?: '=';
-                $junction = $field[2] ?: '';
+                $junction = (!empty($field[2])) ? $field[2] : '';
                 $junction = ($idx && !$junction) ? 'AND' : $junction;
             } else {
                 $operator = $field[1] ? ':' . $field[1] : ':=';
-                $junction = $field[2] ? $field[2] . ':' : '';
+                $junction = (!empty($field[2])) ? $field[2] . ':' : '';
             }
 
             if (in_array($field[1], ['GEOCODE', 'DATERANGE'])) {
