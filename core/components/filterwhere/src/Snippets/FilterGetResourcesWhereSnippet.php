@@ -213,7 +213,12 @@ class FilterGetResourcesWhereSnippet extends Snippet
      */
     private function havingLike(string $junction, string $field, string $operator, string $value): string
     {
-        return "$junction $field $operator '%$value%'";
+        if ($value == json_encode($value)) {
+            return "$junction $field $operator '%$value%'";
+        } else {
+            $jsonValue = json_encode($value);
+            return "($junction $field $operator '%$value%' OR $junction $field $operator '%$jsonValue%')";
+        }
     }
 
     /**
@@ -398,8 +403,15 @@ class FilterGetResourcesWhereSnippet extends Snippet
      */
     private function whereLike(string $junction, string $field, string $operator, string $value): array
     {
-        $value = str_replace(' ', '%', $value);
-        return [$junction . $field . $operator => '%' . $value . '%'];
+        if ($value == json_encode($value)) {
+            return [$junction . $field . $operator => '%' . $value . '%'];
+        } else {
+            $jsonValue = json_encode($value);
+            return [
+                [$junction . $field . $operator => '%' . $value . '%'],
+                ['OR:' . $field . $operator => '%' . $jsonValue . '%']
+            ];
+        }
     }
 
     /**
