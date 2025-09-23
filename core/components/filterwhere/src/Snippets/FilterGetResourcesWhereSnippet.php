@@ -522,9 +522,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
                 $where = [];
             }
         } catch (\Geocoder\Exception\Exception $e) {
-            if ($this->filterwhere->getOption('debug')) {
                 $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Geocoder issue: ' . $e->getMessage());
-            }
             $where = ['0 = 1'];
         }
         $this->modx->setPlaceholder('distance_value', $distance);
