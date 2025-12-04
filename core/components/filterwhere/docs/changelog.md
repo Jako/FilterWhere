@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.5] - 2025-12-04
+
+### Added
+
+- Add FilterGetResourcesSortby Snippet
+
+### Changed
+
+- Don't log Geocoder issues in debug mode only
+
+### Fixed
+
+- Fix an array key not exist warning
+- Fix wrong LIKE results, when the search string contains a space
+- Another fix for the GEOCODE operator with junctions
+
 ## [1.1.4] - 2024-03-14
 
 ### Fixed

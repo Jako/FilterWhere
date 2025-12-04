@@ -2,8 +2,8 @@
 
 With this MODX Revolution extra you can generate a xPDO where clause on base of
 request parameters. This where clause can i.e. be used as pdoRessources or
-getResources where property. That way you can filter MODX resources with request
-parameters.
+getResources where property. That way you can filter and sort MODX resources
+with request parameters.
 
 ## Snippets
 
@@ -18,12 +18,12 @@ The Snippet uses the following properties:
 | Property      | Description                                                                                              | Default |
 |---------------|----------------------------------------------------------------------------------------------------------|---------|
 | emptyRedirect | ID of a resource, the user is redirected to, when the generated where clause is empty.                   | -       |
-| fields        | JSON encoded array of ‘filter => resourcefield’ combinations.                                            | -       |
-| options       | JSON encoded array of filter operator options.                                                           | -       |
+| fields        | JSON-encoded array of ‘filter => resourcefield’ combinations.                                            | -       |
+| options       | JSON-encoded array of filter operator options.                                                           | -       |
 | toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly.       | -       |
 | type          | Type of the xPDO clause to filter the resources. Can be set to ‘where’ or ‘having’. Defaults to ‘where’. | where   |
 | varName       | Name of the superglobal variable that is searched for the filter values.                                 | REQUEST |
-| where         | JSON encoded xPDO where clause to filter the resources.                                                  | -       |
+| where         | JSON-encoded xPDO where clause to filter the resources.                                                  | -       |
 
 The fields property uses the following syntax:
 
@@ -45,7 +45,7 @@ The sanitized values of each request key is set as placeholder in `<key>_value`.
 Using the `where` property, you can combine the created where clause with an
 additional where clause created i.e. with `TaggerGetResourcesWhere`.
 
-## Operators
+#### Operators
 
 FilterWhere can use the default xPDO operators like 
 
@@ -79,7 +79,7 @@ There are some additional operators available with FilterWhere:
   separated by `||`) is calculated. This distance has to be smaller than the
   requested `distance` value.
 
-### Operator Options
+##### Operator Options
 
 FilterGetResourcesWhere uses the following operator options in a JSON encoded
 value in the `options` property:
@@ -89,10 +89,9 @@ value in the `options` property:
 | daterangeseparator | The string, the requested value is separated with when the `DATERANGE` operator is used.             | `-`           |
 | dateformat         | The values in start and end date can be formatted with the `dateformat` option or set to `unixtime`. | `Y-m-d H:i:s` |
 
+#### Examples
 
-## Examples
-
-### In Array
+##### In Array
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
@@ -116,7 +115,7 @@ Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 This form will filter a getResources snippet call showing only resources with
 the `alias` 'foo' and/or 'bar', if one checkbox is enabled.
 
-### Range
+##### Range
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
@@ -144,7 +143,7 @@ Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 This form will filter a getResources snippet call showing resources if the TV
 value `count` is inside the range, if one checkbox is enabled.
 
-### Daterange
+##### Daterange
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
@@ -167,7 +166,7 @@ daterange set in the daterange input (Example value: `2023-12-01 - 2023-12-30`).
 
 If the second part of the daterange is not set, the range has no end.
 
-### Geocode
+##### Geocode
 
 Create a form on a page and prepend it with a FilterGetResourcesWhere call:
 
@@ -200,6 +199,59 @@ All forms use the following getResources snippet call.
 [[!getResources?
 ...
 &where=`[[!+resourceswhere]]`
+]]
+```
+
+### FilterGetResourcesSortby
+
+The FilterGetResourcesSortby snippet creates a sortby clause that can i.e. be used
+as pdoRessources or getResources sortby property. It has to be called uncached to
+work on the request values.
+
+The Snippet uses the following properties:
+
+| Property      | Description                                                                                                             | Default |
+|---------------|-------------------------------------------------------------------------------------------------------------------------|---------|
+| dirkey        | The name of a request key that is used to set the sort direction.                                                       | -       |
+| sortby        | JSON-encoded xPDO sortby clause to sort the resources. This sorting is used before the sorting of the request is added. | -       |
+| sortkey       | The name of a request key that is used to set the sort field.                                                           | -       |
+| toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly.                      | -       |
+| varName       | Name of the superglobal variable that is searched for the filter values.                                                | REQUEST |
+
+#### Examples
+
+##### Sorting
+
+Create a form on a page and prepend it with a FilterGetResourcesSortby call:
+
+```html
+[[!FilterGetResourcesSortby?
+&toPlaceholder=`resourcessortby`
+]]
+<form method="get" action="[[~[[*id]]]]">
+    <div>
+        <select name="sortby">
+            <option value="pagetitle" selected="true" [[!+sortby_value:FormItIsSelected=`pagetitle`]]>Pagetitle</option>
+            <option value="createdon" [[!+sortby_value:FormItIsSelected=`createdon`]]>Created on</option>
+        </select>
+        <select name="sortdir">
+            <option value="ASC" selected="true" [[!+sortdir_value:FormItIsSelected=`ASC`]]>Ascending</option>
+            <option value="DESC" [[!+sortdir_value:FormItIsSelected=`DESC`]]>Descending</option>
+        </select>
+        <input type="hidden" name="sortdir" value="ASC">
+    </div>    						
+</form>
+```
+
+This form will filter a getResources snippet call showing resources sort by the
+pagetitle or createdon field in ascending or descanding order.
+
+This form use the following getResources snippet call.
+
+```html
+[[!getResources?
+...
+&sortby=`[[!+resourcessortby]]`
 ]]
 ```
 

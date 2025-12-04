@@ -2,7 +2,7 @@
 /**
  * FilterWhere classfile
  *
- * Copyright 2021-2024 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2021-2025 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package filterwhere
  * @subpackage classfile
@@ -39,7 +39,7 @@ class FilterWhere
      * The version
      * @var string $version
      */
-    public $version = '1.1.4';
+    public $version = '1.1.5';
 
     /**
      * The class options

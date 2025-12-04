@@ -3,7 +3,7 @@
   "lowCaseName": "filterwhere",
   "description": "Filter resources with request parameters",
   "author": "Thomas Jakobi",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "package": {
     "elements": {
       "snippets": [
@@ -38,6 +38,32 @@
             {
               "name": "type",
               "value": "where"
+            }
+          ]
+        },
+        {
+          "name": "FilterGetResourcesSortby",
+          "file": "filtergetresourcessortby.snippet.php",
+          "properties": [
+            {
+              "name": "sortkey",
+              "value": ""
+            },
+            {
+              "name": "dirkey",
+              "value": ""
+            },
+            {
+              "name": "sortby",
+              "value": ""
+            },
+            {
+              "name": "toPlaceholder",
+              "value": ""
+            },
+            {
+              "name": "varName",
+              "value": "REQUEST"
             }
           ]
         }
