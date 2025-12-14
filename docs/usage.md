@@ -32,7 +32,7 @@ The fields property uses the following syntax:
 ```
 
 `request_key` contains the request key from which the value is retrieved.
-`resource_fields` contains a comma separated list of resource fields which are
+`resource_fields` contains a comma-separated list of resource fields which are
 searched by the value. `operator` is optional and contains the xPDO query
 operator like `=`, `>`, `LIKE` etc. It defaults to `=`. If the operator is
 `LIKE`, the searched value is surrounded with `%`, to create a wildcard search
