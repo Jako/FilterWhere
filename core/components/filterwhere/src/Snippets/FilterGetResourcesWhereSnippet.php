@@ -67,6 +67,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
         // URL parameter
         $idx = 0;
         foreach ($fields as $key => $field) {
+            $key = trim($key);
             $field = explode('::', $field);
             $value = $this->modx->getOption($key, $this->values, false);
             $phValue = ($value) ? $this->stripTags($value) : '';
@@ -123,10 +124,11 @@ class FilterGetResourcesWhereSnippet extends Snippet
         }
 
         if ($type == 'having') {
-            $output = ($where) ? '["' . trim(implode(' ', $where)) . '"]' : '';
+            $output = ($where) ? '["' . str_replace(['[[', ']]'], ['[ [', '] ]'], trim(implode(' ', $where))) . '"]' : '';
         } else {
             $output = str_replace(['[[', ']]'], ['[ [', '] ]'], json_encode($where));
         }
+        $output = str_replace(['[[', ']]'], ['[ [', '] ]'], $output);
 
         if ($toPlaceholder) {
             $this->modx->setPlaceholder($toPlaceholder, $output);
@@ -191,6 +193,9 @@ class FilterGetResourcesWhereSnippet extends Snippet
                         break;
                     case 'DATERANGE':
                         $having[] = $this->havingDaterange($junction, $field, $value);
+                        break;
+                    case 'TIMERANGE':
+                        $having[] = $this->havingTimerange($junction, $field, $value);
                         break;
                     case 'GEOCODE':
                         $having[] = $this->havingGeocode($junction, $field, $value);
@@ -298,6 +303,34 @@ class FilterGetResourcesWhereSnippet extends Snippet
      * @param string $value
      * @return string
      */
+    private function havingTimerange(string $junction, string $field, string $value): array
+    {
+        try {
+            $separator = $this->modx->getOption('timerangeseparator', $this->getProperty('options'), '-', true);
+            $timerange = array_map('trim', explode($separator, $value));
+            $start = (!empty($timerange[0])) ? (int)$timerange[0] : false;
+            $end = (!empty($timerange[1])) ? (int)$timerange[1] : false;
+            if ($start && $end) {
+                $having = "$junction HOUR($field) >= $start AND HOUR($field) < $end";
+            } elseif ($start) {
+                $having = "$junction HOUR($field) >= $start";
+            } elseif ($end) {
+                $having = "$junction HOUR($field) < $end";
+            } else {
+                $having = $junction . ' 0 = 1';
+            }
+        } catch (Exception $e) {
+            $having = $junction . ' 0 = 1';
+        }
+        return $having;
+    }
+
+    /**
+     * @param string $junction
+     * @param string $field
+     * @param string $value
+     * @return string
+     */
     private function havingGeocode(string $junction, string $field, string $value): string
     {
         $geolocation = new Geocode($this->modx);
@@ -376,6 +409,9 @@ class FilterGetResourcesWhereSnippet extends Snippet
                         break;
                     case ':DATERANGE':
                         $where[] = $this->whereDaterange($junction, $field, $value);
+                        break;
+                    case ':TIMERANGE':
+                        $where[] = $this->whereTimerange($junction, $field, $value);
                         break;
                     case ':GEOCODE':
                         $where[] = $this->whereGeocode($junction, $field, $value);
@@ -481,6 +517,41 @@ class FilterGetResourcesWhereSnippet extends Snippet
             } elseif ($end) {
                 $where = [
                     $junction . $field . ':<' => $end,
+                ];
+            } else {
+                $where = ['0 = 1'];
+            }
+        } catch (Exception $e) {
+            $where = ['0 = 1'];
+        }
+        return $where;
+    }
+
+    /**
+     * @param string $junction
+     * @param string $field
+     * @param string $value
+     * @return array
+     */
+    private function whereTimerange(string $junction, string $field, string $value): array
+    {
+        try {
+            $separator = $this->modx->getOption('timerangeseparator', $this->getProperty('options'), '-', true);
+            $timerange = array_map('trim', explode($separator, $value));
+            $start = (!empty($timerange[0])) ? (int)$timerange[0] : false;
+            $end = (!empty($timerange[1])) ? (int)$timerange[1] : false;
+            if ($start && $end) {
+                $where = [
+                    rtrim($junction, ':') . ' HOUR(' . $field . ') >= ' . $start .
+                    ' AND HOUR(' . $field . ')' . ' < ' . $end
+                ];
+            } elseif ($start) {
+                $where = [
+                    rtrim($junction, ':') . ' HOUR(' . $field . ')' . ' >= ' . $start
+                ];
+            } elseif ($end) {
+                $where = [
+                    rtrim($junction, ':') . ' HOUR(' . $field . ')' . ' < ' => $end,
                 ];
             } else {
                 $where = ['0 = 1'];
