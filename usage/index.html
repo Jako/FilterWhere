@@ -983,10 +983,16 @@ quotes, if request values are not an array.</p>
 <li>
 <p><code>DATERANGE</code>: The requested value will be separated by a string referenced in
   the <code>daterangeseparator</code> option. The two parts are parsed as <a href="https://www.php.net/manual/en/datetime.formats.php">valid date/time
-  string</a>. The resulting
-  first two values will be used as the start and the end of a date range. The
-  start and end date can be formatted with the <code>dateformat</code> option or set to
+  string</a>. The resulting 
+  first two values will be used as the start and the end of a date range. The 
+  start and end date can be formatted with the <code>dateformat</code> option or set to 
   <code>unixtime</code>.</p>
+</li>
+<li>
+<p><code>TIMERANGE</code>: The requested value will be separated by a string referenced in
+  the <code>timerangeseparator</code> option. The two parts are used as integer values. 
+  The resulting first two values will be used as the start and the end hour of 
+  a time range.</p>
 </li>
 <li>
 <p><code>GEOCODE</code>: The requested value will be geocoded with Google Maps Geocoding
