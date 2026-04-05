@@ -1,8 +1,9 @@
 # FilterWhere
 
-Filter resources with request parameters. With this MODX Revolution package you
-can generate a xPDO where clause on base of request parameters. This where
-clause can i.e. be used as pdoRessources or getResources where property.
+Filter resources and other xPDO Objects with request parameters. With this MODX
+Revolution package you can generate a xPDO where clause on base of request
+parameters. This where clause can i.e. be used as pdoRessources or getResources
+where property.
 
 ### Requirements
 
