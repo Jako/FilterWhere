@@ -6,17 +6,26 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Documentation for FilterWhere, the powerful xPDO where clause generation for MODX.">
       
+      
+        <meta name="author" content="Treehill Studio">
+      
+      
+        <link rel="canonical" href="https://jako.github.io/FilterWhere/usage/">
       
       
         <link rel="prev" href="../installation/">
       
       
-        <link rel="next" href="../contributors/">
+        <link rel="next" href="../changelog/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="zensical-0.0.27">
     
     
       
@@ -24,7 +33,15 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.50057488.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.dfe2e883.min.css">
       
       
 
@@ -34,10 +51,11 @@
       
     
     
-      
+
     
+      <link rel="stylesheet" href="../assets/stylesheets/treehillstudio.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
     
       
   
@@ -62,29 +80,22 @@
 
     
     
+  </head>
+  
+  
     
-<link href="../assets/stylesheets/treehillstudio.css" rel="stylesheet">
-
-   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-        html.glightbox-open { overflow: initial; height: 100%; }
-        .gslide-title { margin-top: 0px; user-select: text; }
-        .gslide-desc { color: #666; user-select: text; }
-        .gslide-image img { background: white; }
-        
-            .gscrollbar-fixer { padding-right: 15px; }
-            .gdesc-inner { font-size: 0.75rem; }
-            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
-  
-  
-    <body dir="ltr">
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
     <div data-md-component="skip">
       
         
@@ -98,7 +109,8 @@
     </div>
     
     
-    <div class="ths-header__above">
+    
+        <div class="ths-header__above">
   <div class="md-header__inner md-grid">
     <div class="px-2 sm:px-6 lg:px-8 ths-header">
       <div class="flex h-24 items-center justify-between relative ths-header__outer">
@@ -111,9 +123,12 @@
           </div>
           <div class="flex-grow hidden md:block md:ml-6 ths-header__menu-outer">
             <div class="flex justify-end mt-6 space-x-4 ths-header__menu-inner">
-              <a class="border-b border-green border-opacity-0 font-bold hover:border-opacity-100 hover:text-white text-gray-300 text-sm uppercase ths-header__menu-item" href="https://treehillstudio.com/documentation.html">Documentation Overview</a>
+              
+              <a class="border-b border-green border-opacity-0 font-bold hover:border-opacity-100 hover:text-white text-gray-300 text-sm uppercase ths-header__menu-item" href="https://treehillstudio.com/documentation.html">Documentation</a>
               <a class="border-b border-green border-opacity-0 font-bold hover:border-opacity-100 hover:text-white text-gray-300 text-sm uppercase ths-header__menu-item" href="https://treehillstudio.com/about.html">About Treehill Studio</a>
+              
               <a class="border-b border-green border-opacity-0 font-bold hover:border-opacity-100 hover:text-white text-gray-300 text-sm uppercase ths-header__menu-item" href="https://treehillstudio.com/donate.html">Donate</a>
+              
               <a class="border-b border-green border-opacity-0 font-bold hover:border-opacity-100 hover:text-white text-gray-300 text-sm uppercase ths-header__menu-item" href="https://treehillstudio.com/imprint.html">Imprint</a>
             </div>
           </div>
@@ -123,20 +138,22 @@
   </div>
 </div>
     
+    
+      
 
   
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="FilterWhere" class="md-header__button md-logo" aria-label="FilterWhere" data-md-component="logo">
+    <a href="./.." title="FilterWhere" class="md-header__button md-logo" aria-label="FilterWhere" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
 
     </a>
-    <label class="md-header__button md-icon" for="__drawer">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -155,54 +172,56 @@
       </div>
     </div>
     
-    
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
       
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
 </div>
+      
     
     
       <div class="md-header__source">
-        <a href="https://github.com/Jako/FilterWhere" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/Jako/FilterWhere/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     Jako/FilterWhere
@@ -213,6 +232,7 @@
   </nav>
   
 </header>
+    
 
     <div class="md-container" data-md-component="container">
       
@@ -235,20 +255,20 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="FilterWhere" class="md-nav__button md-logo" aria-label="FilterWhere" data-md-component="logo">
+    <a href="./.." title="FilterWhere" class="md-nav__button md-logo" aria-label="FilterWhere" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
 
     </a>
     FilterWhere
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/Jako/FilterWhere" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/Jako/FilterWhere/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     Jako/FilterWhere
@@ -265,12 +285,19 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="./.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Description
+    
+  
+    FilterWhere
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -288,9 +315,16 @@
       <a href="../installation/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Installation
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -315,41 +349,58 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="././" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
       </a>
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
   
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      
+        Introduction
+      
     </span>
   </a>
   
@@ -358,7 +409,9 @@
         <li class="md-nav__item">
   <a href="#snippets" class="md-nav__link">
     <span class="md-ellipsis">
-      Snippets
+      
+        Snippets
+      
     </span>
   </a>
   
@@ -368,21 +421,21 @@
           <li class="md-nav__item">
   <a href="#filtergetresourceswhere" class="md-nav__link">
     <span class="md-ellipsis">
-      FilterGetResourcesWhere
+      
+        FilterGetResourcesWhere
+      
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="FilterGetResourcesWhere">
+      <ul class="md-nav__list">
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#operators" class="md-nav__link">
     <span class="md-ellipsis">
-      Operators
+      
+        Operators
+      
     </span>
   </a>
   
@@ -392,7 +445,9 @@
           <li class="md-nav__item">
   <a href="#operator-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Operator Options
+      
+        Operator Options
+      
     </span>
   </a>
   
@@ -402,11 +457,13 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      
+        Examples
+      
     </span>
   </a>
   
@@ -416,7 +473,9 @@
           <li class="md-nav__item">
   <a href="#in-array" class="md-nav__link">
     <span class="md-ellipsis">
-      In Array
+      
+        In Array
+      
     </span>
   </a>
   
@@ -425,7 +484,9 @@
           <li class="md-nav__item">
   <a href="#range" class="md-nav__link">
     <span class="md-ellipsis">
-      Range
+      
+        Range
+      
     </span>
   </a>
   
@@ -434,7 +495,9 @@
           <li class="md-nav__item">
   <a href="#daterange" class="md-nav__link">
     <span class="md-ellipsis">
-      Daterange
+      
+        Daterange
+      
     </span>
   </a>
   
@@ -443,9 +506,66 @@
           <li class="md-nav__item">
   <a href="#geocode" class="md-nav__link">
     <span class="md-ellipsis">
-      Geocode
+      
+        Geocode
+      
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergetresourcessortby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FilterGetResourcesSortby
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FilterGetResourcesSortby">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -457,7 +577,9 @@
         <li class="md-nav__item">
   <a href="#system-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      System Settings
+      
+        System Settings
+      
     </span>
   </a>
   
@@ -478,12 +600,46 @@
   
   
     <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../contributors/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contributors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -504,21 +660,24 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
   
   
   
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On this page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      
+        Introduction
+      
     </span>
   </a>
   
@@ -527,7 +686,9 @@
         <li class="md-nav__item">
   <a href="#snippets" class="md-nav__link">
     <span class="md-ellipsis">
-      Snippets
+      
+        Snippets
+      
     </span>
   </a>
   
@@ -537,21 +698,21 @@
           <li class="md-nav__item">
   <a href="#filtergetresourceswhere" class="md-nav__link">
     <span class="md-ellipsis">
-      FilterGetResourcesWhere
+      
+        FilterGetResourcesWhere
+      
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="FilterGetResourcesWhere">
+      <ul class="md-nav__list">
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#operators" class="md-nav__link">
     <span class="md-ellipsis">
-      Operators
+      
+        Operators
+      
     </span>
   </a>
   
@@ -561,7 +722,9 @@
           <li class="md-nav__item">
   <a href="#operator-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Operator Options
+      
+        Operator Options
+      
     </span>
   </a>
   
@@ -571,11 +734,13 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      
+        Examples
+      
     </span>
   </a>
   
@@ -585,7 +750,9 @@
           <li class="md-nav__item">
   <a href="#in-array" class="md-nav__link">
     <span class="md-ellipsis">
-      In Array
+      
+        In Array
+      
     </span>
   </a>
   
@@ -594,7 +761,9 @@
           <li class="md-nav__item">
   <a href="#range" class="md-nav__link">
     <span class="md-ellipsis">
-      Range
+      
+        Range
+      
     </span>
   </a>
   
@@ -603,7 +772,9 @@
           <li class="md-nav__item">
   <a href="#daterange" class="md-nav__link">
     <span class="md-ellipsis">
-      Daterange
+      
+        Daterange
+      
     </span>
   </a>
   
@@ -612,9 +783,66 @@
           <li class="md-nav__item">
   <a href="#geocode" class="md-nav__link">
     <span class="md-ellipsis">
-      Geocode
+      
+        Geocode
+      
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergetresourcessortby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FilterGetResourcesSortby
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FilterGetResourcesSortby">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sorting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -626,7 +854,9 @@
         <li class="md-nav__item">
   <a href="#system-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      System Settings
+      
+        System Settings
+      
     </span>
   </a>
   
@@ -642,21 +872,29 @@
           
           
             <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
               <article class="md-content__inner md-typeset">
                 
                   
-
   
   
 
 
-  <h1>Usage</h1>
+  <h1 id="__skip">Usage</h1>
 
 <h2 id="introduction">Introduction</h2>
 <p>With this MODX Revolution extra you can generate a xPDO where clause on base of
 request parameters. This where clause can i.e. be used as pdoRessources or
-getResources where property. That way you can filter MODX resources with request
-parameters.</p>
+getResources where property. That way you can filter and sort MODX resources
+with request parameters.</p>
 <h2 id="snippets">Snippets</h2>
 <h3 id="filtergetresourceswhere">FilterGetResourcesWhere</h3>
 <p>The FilterGetResourcesWhere snippet creates a where clause that can i.e. be used
@@ -679,12 +917,12 @@ work on the request values.</p>
 </tr>
 <tr>
 <td>fields</td>
-<td>JSON encoded array of ‘filter =&gt; resourcefield’ combinations.</td>
+<td>JSON-encoded array of ‘filter =&gt; resourcefield’ combinations.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>options</td>
-<td>JSON encoded array of filter operator options.</td>
+<td>JSON-encoded array of filter operator options.</td>
 <td>-</td>
 </tr>
 <tr>
@@ -704,16 +942,16 @@ work on the request values.</p>
 </tr>
 <tr>
 <td>where</td>
-<td>JSON encoded xPDO where clause to filter the resources.</td>
+<td>JSON-encoded xPDO where clause to filter the resources.</td>
 <td>-</td>
 </tr>
 </tbody>
 </table>
 <p>The fields property uses the following syntax:</p>
-<div class="highlight"><pre><span></span><code>{&quot;&lt;request_key&gt;&quot;:&quot;&lt;resource_fields&gt;::&lt;operator&gt;::&lt;junction&gt;&quot;}
-</code></pre></div>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="nt">&quot;&lt;request_key&gt;&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;resource_fields&gt;::&lt;operator&gt;::&lt;junction&gt;&quot;</span><span class="p">}</span>
+</span></code></pre></div>
 <p><code>request_key</code> contains the request key from which the value is retrieved.
-<code>resource_fields</code> contains a comma separated list of resource fields which are
+<code>resource_fields</code> contains a comma-separated list of resource fields which are
 searched by the value. <code>operator</code> is optional and contains the xPDO query
 operator like <code>=</code>, <code>&gt;</code>, <code>LIKE</code> etc. It defaults to <code>=</code>. If the operator is
 <code>LIKE</code>, the searched value is surrounded with <code>%</code>, to create a wildcard search
@@ -723,7 +961,7 @@ in an xPDO where clause.</p>
 <p>The sanitized values of each request key is set as placeholder in <code>&lt;key&gt;_value</code>.</p>
 <p>Using the <code>where</code> property, you can combine the created where clause with an
 additional where clause created i.e. with <code>TaggerGetResourcesWhere</code>.</p>
-<h2 id="operators">Operators</h2>
+<h4 id="operators">Operators</h4>
 <p>FilterWhere can use the default xPDO operators like </p>
 <p><code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>, <code>LIKE</code> and <code>IN</code></p>
 <p>If the operator <code>LIKE</code> is used, the query value is surrounded with <code>%</code>. If the
@@ -758,7 +996,7 @@ quotes, if request values are not an array.</p>
   requested <code>distance</code> value.</p>
 </li>
 </ul>
-<h3 id="operator-options">Operator Options</h3>
+<h5 id="operator-options">Operator Options</h5>
 <p>FilterGetResourcesWhere uses the following operator options in a JSON encoded
 value in the <code>options</code> property:</p>
 <table>
@@ -782,94 +1020,163 @@ value in the <code>options</code> property:</p>
 </tr>
 </tbody>
 </table>
-<h2 id="examples">Examples</h2>
-<h3 id="in-array">In Array</h3>
+<h4 id="examples">Examples</h4>
+<h5 id="in-array">In Array</h5>
 <p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
-<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
-&amp;fields=`{ &quot;resource&quot;:&quot;alias::IN&quot; }`
-&amp;toPlaceholder=`resourceswhere`
-]]
-&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;checkbox&quot; name=&quot;resource[]&quot; value=&quot;foo&quot; [[!+resource_value:FormItIsChecked=`foo`]]&gt;
-        &lt;label&gt;Foo&lt;/label&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;checkbox&quot; name=&quot;resource[]&quot; value=&quot;bar&quot; [[!+resource_value:FormItIsChecked=`bar`]]&gt;
-        &lt;label&gt;Bar&lt;/label&gt;
-    &lt;/div&gt;
-&lt;/form&gt;
-</code></pre></div>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[[!FilterGetResourcesWhere?
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">&amp;</span>fields=`{ &quot;resource&quot;:&quot;alias::IN&quot; }`
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">&amp;</span>toPlaceholder=`resourceswhere`
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>]]
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;[[~[[*id]]]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;resource[]&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;foo&quot;</span> <span class="err">[[!+</span><span class="na">resource_value:FormItIsChecked</span><span class="o">=</span><span class="s">`foo`]]</span><span class="p">&gt;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Foo<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;resource[]&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;bar&quot;</span> <span class="err">[[!+</span><span class="na">resource_value:FormItIsChecked</span><span class="o">=</span><span class="s">`bar`]]</span><span class="p">&gt;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Bar<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
 <p>This form will filter a getResources snippet call showing only resources with
 the <code>alias</code> 'foo' and/or 'bar', if one checkbox is enabled.</p>
-<h3 id="range">Range</h3>
+<h5 id="range">Range</h5>
 <p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
-<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
-&amp;fields=`{ &quot;count&quot;:&quot;count::RANGE&quot; }`
-&amp;toPlaceholder=`resourceswhere`
-]]
-&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;checkbox&quot; name=&quot;count&quot; value=&quot;0-2&quot; [[!+count_value:eq=`0-2`:then=`checked`:else=``]]&gt;
-        &lt;label&gt;Count 0-2&lt;/label&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;checkbox&quot; name=&quot;count&quot; value=&quot;2-4&quot; [[!+count_value:eq=`2-4`:then=`checked`:else=``]]&gt;
-        &lt;label&gt;Count 2-4&lt;/label&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;checkbox&quot; name=&quot;count&quot; value=&quot;4-&quot; [[!+count_value:eq=`4-`:then=`checked`:else=``]]&gt;
-        &lt;label&gt;Count 4+&lt;/label&gt;
-    &lt;/div&gt;                          
-&lt;/form&gt;
-</code></pre></div>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[[!FilterGetResourcesWhere?
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">&amp;</span>fields=`{ &quot;count&quot;:&quot;count::RANGE&quot; }`
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">&amp;</span>toPlaceholder=`resourceswhere`
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>]]
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;[[~[[*id]]]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;count&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;0-2&quot;</span> <span class="err">[[!+</span><span class="na">count_value:eq</span><span class="o">=</span><span class="s">`0-2`:then=`checked`:else=``]]</span><span class="p">&gt;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Count 0-2<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;count&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;2-4&quot;</span> <span class="err">[[!+</span><span class="na">count_value:eq</span><span class="o">=</span><span class="s">`2-4`:then=`checked`:else=``]]</span><span class="p">&gt;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Count 2-4<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;count&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;4-&quot;</span> <span class="err">[[!+</span><span class="na">count_value:eq</span><span class="o">=</span><span class="s">`4-`:then=`checked`:else=``]]</span><span class="p">&gt;</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Count 4+<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>                          
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
 <p>This form will filter a getResources snippet call showing resources if the TV
 value <code>count</code> is inside the range, if one checkbox is enabled.</p>
-<h3 id="daterange">Daterange</h3>
+<h5 id="daterange">Daterange</h5>
 <p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
-<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
-&amp;fields=`{ &quot;daterange&quot;:&quot;publishedon::DATERANGE&quot; }`
-&amp;options=`{ &quot;daterangeseparator&quot;:&quot; - &quot;, &quot;dateformat&quot;:&quot;unixtime&quot; }`
-&amp;toPlaceholder=`resourceswhere`
-]]
-&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;text&quot; name=&quot;daterange&quot; value=&quot;[[!+daterange_value]]&quot;&gt;
-        &lt;label&gt;Daterange&lt;/label&gt;
-    &lt;/div&gt;
-&lt;/form&gt;
-</code></pre></div>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[[!FilterGetResourcesWhere?
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">&amp;</span>fields=`{ &quot;daterange&quot;:&quot;publishedon::DATERANGE&quot; }`
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">&amp;</span>options=`{ &quot;daterangeseparator&quot;:&quot; - &quot;, &quot;dateformat&quot;:&quot;unixtime&quot; }`
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">&amp;</span>toPlaceholder=`resourceswhere`
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>]]
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;[[~[[*id]]]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;daterange&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;[[!+daterange_value]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Daterange<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
 <p>This form will filter a getResources snippet call showing resources in the
 daterange set in the daterange input (Example value: <code>2023-12-01 - 2023-12-30</code>).</p>
 <p>If the second part of the daterange is not set, the range has no end.</p>
-<h3 id="geocode">Geocode</h3>
+<h5 id="geocode">Geocode</h5>
 <p>Create a form on a page and prepend it with a FilterGetResourcesWhere call:</p>
-<div class="highlight"><pre><span></span><code>[[!FilterGetResourcesWhere?
-&amp;fields=`{ &quot;geolocation&quot;:&quot;lat||lng::GEOCODE&quot; }`
-&amp;toPlaceholder=`resourceswhere`
-]]
-&lt;form method=&quot;get&quot; action=&quot;[[~[[*id]]]]&quot;&gt;
-    &lt;div&gt;
-        &lt;input type=&quot;text&quot; name=&quot;geolocation&quot; value=&quot;[[!+geolocation_value]]&quot;&gt;
-        &lt;select name=&quot;distance&quot;&gt;
-            &lt;option selected=&quot;true&quot; disabled [[!+distance_value:FormItIsSelected=``]]&gt;Distance&lt;/option&gt;
-            &lt;option value=&quot;5&quot; [[!+distance_value:FormItIsSelected=`5`]]&gt;5 km&lt;/option&gt;
-            &lt;option value=&quot;10&quot; [[!+distance_value:FormItIsSelected=`10`]]&gt;10 km&lt;/option&gt;
-            &lt;option value=&quot;25&quot; [[!+distance_value:FormItIsSelected=`25`]]&gt;25 km&lt;/option&gt;
-            &lt;option value=&quot;50&quot; [[!+distance_value:FormItIsSelected=`50`]]&gt;50 km&lt;/option&gt;
-        &lt;/select&gt;
-    &lt;/div&gt;                          
-&lt;/form&gt;
-</code></pre></div>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[[!FilterGetResourcesWhere?
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">&amp;</span>fields=`{ &quot;geolocation&quot;:&quot;lat||lng::GEOCODE&quot; }`
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">&amp;</span>toPlaceholder=`resourceswhere`
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>]]
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;[[~[[*id]]]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;geolocation&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;[[!+geolocation_value]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;distance&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">selected</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">disabled</span> <span class="err">[[!+</span><span class="na">distance_value:FormItIsSelected</span><span class="o">=</span><span class="s">``]]</span><span class="p">&gt;</span>Distance<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;5&quot;</span> <span class="err">[[!+</span><span class="na">distance_value:FormItIsSelected</span><span class="o">=</span><span class="s">`5`]]</span><span class="p">&gt;</span>5 km<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;10&quot;</span> <span class="err">[[!+</span><span class="na">distance_value:FormItIsSelected</span><span class="o">=</span><span class="s">`10`]]</span><span class="p">&gt;</span>10 km<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="err">[[!+</span><span class="na">distance_value:FormItIsSelected</span><span class="o">=</span><span class="s">`25`]]</span><span class="p">&gt;</span>25 km<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="err">[[!+</span><span class="na">distance_value:FormItIsSelected</span><span class="o">=</span><span class="s">`50`]]</span><span class="p">&gt;</span>50 km<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>                          
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
 <p>This form will filter a getResources snippet call showing resources with a max
 distance around the geocoded value, if the geocoded value is has a result and
 the distance is set. Otherwise, the result is empty.</p>
 <p>All forms use the following getResources snippet call.</p>
-<div class="highlight"><pre><span></span><code>[[!getResources?
-...
-&amp;where=`[[!+resourceswhere]]`
-]]
-</code></pre></div>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[[!getResources?
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>...
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">&amp;</span>where=`[[!+resourceswhere]]`
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>]]
+</span></code></pre></div>
+<h3 id="filtergetresourcessortby">FilterGetResourcesSortby</h3>
+<p>The FilterGetResourcesSortby snippet creates a sortby clause that can i.e. be used
+as pdoRessources or getResources sortby property. It has to be called uncached to
+work on the request values.</p>
+<p>The Snippet uses the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dirkey</td>
+<td>The name of a request key that is used to set the sort direction.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>sortby</td>
+<td>JSON-encoded xPDO sortby clause to sort the resources. This sorting is used before the sorting of the request is added.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>sortkey</td>
+<td>The name of a request key that is used to set the sort field.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>toPlaceholder</td>
+<td>If set, the snippet result will be assigned to this placeholder instead of outputting it directly.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>varName</td>
+<td>Name of the superglobal variable that is searched for the filter values.</td>
+<td>REQUEST</td>
+</tr>
+</tbody>
+</table>
+<h4 id="examples_1">Examples</h4>
+<h5 id="sorting">Sorting</h5>
+<p>Create a form on a page and prepend it with a FilterGetResourcesSortby call:</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[[!FilterGetResourcesSortby?
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">&amp;</span>toPlaceholder=`resourcessortby`
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>]]
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;[[~[[*id]]]]&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;sortby&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;pagetitle&quot;</span> <span class="na">selected</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="err">[[!+</span><span class="na">sortby_value:FormItIsSelected</span><span class="o">=</span><span class="s">`pagetitle`]]</span><span class="p">&gt;</span>Pagetitle<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;createdon&quot;</span> <span class="err">[[!+</span><span class="na">sortby_value:FormItIsSelected</span><span class="o">=</span><span class="s">`createdon`]]</span><span class="p">&gt;</span>Created on<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;sortdir&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;ASC&quot;</span> <span class="na">selected</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="err">[[!+</span><span class="na">sortdir_value:FormItIsSelected</span><span class="o">=</span><span class="s">`ASC`]]</span><span class="p">&gt;</span>Ascending<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;DESC&quot;</span> <span class="err">[[!+</span><span class="na">sortdir_value:FormItIsSelected</span><span class="o">=</span><span class="s">`DESC`]]</span><span class="p">&gt;</span>Descending<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;sortdir&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;ASC&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>                          
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>This form will filter a getResources snippet call showing resources sort by the
+pagetitle or createdon field in ascending or descanding order.</p>
+<p>This form use the following getResources snippet call.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[[!getResources?
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>...
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">&amp;</span>sortby=`[[!+resourcessortby]]`
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>]]
+</span></code></pre></div>
 <h2 id="system-settings">System Settings</h2>
 <p>FilterWhere uses the following system settings in the namespace <code>filterwhere</code>:</p>
 <table>
@@ -911,6 +1218,8 @@ the distance is set. Otherwise, the result is empty.</p>
 
 
 
+
+
   
 
 
@@ -921,8 +1230,16 @@ the distance is set. Otherwise, the result is empty.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -933,34 +1250,43 @@ the distance is set. Otherwise, the result is empty.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      &copy; 2021-2024 <a href="https://treehillstudio.com">Treehill Studio</a>
+      &copy; 2021-2026 <a href="https://treehillstudio.com">Treehill Studio</a>
+
     </div>
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
     </a>
   
 </div>
       
-        <div class="md-social">
+        
   
-  
-  
-  
-  
-  
-  <a href="https://github.com/Jako" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-  </a>
-  
+  <div class="md-social">
+    
+      
+      
+      
+      
+      <a href="https://github.com/Jako" target="_blank" rel="noopener" title="Jako on GitHub" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+      </a>
+    
+  </div>
+
+
+
+    <div class="md-footer-logo">
+    <a href="https://treehillstudio.com" class="md-footer-logo__link">
+        <img src="../assets/images/treehill-studio-invers.svg">
+    </a>
 </div>
-<div class="md-footer-logo">
-  <a href="https://treehillstudio.com" class="md-footer-logo__link">
-    <img src="../assets/images/treehill-studio-invers.svg">
-  </a>
-</div>
+
+
+
+
       
     </div>
   </div>
@@ -972,11 +1298,15 @@ the distance is set. Otherwise, the result is empty.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.top","navigation.tracking","search.highlight"],"search":"../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../assets/javascripts/bundle.5fd3284f.min.js"></script>
       
     
-  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+  </body>
 </html>
