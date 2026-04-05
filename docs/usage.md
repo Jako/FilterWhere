@@ -68,10 +68,15 @@ There are some additional operators available with FilterWhere:
 
 - `DATERANGE`: The requested value will be separated by a string referenced in
   the `daterangeseparator` option. The two parts are parsed as [valid date/time
-  string](https://www.php.net/manual/en/datetime.formats.php). The resulting
-  first two values will be used as the start and the end of a date range. The
-  start and end date can be formatted with the `dateformat` option or set to
+  string](https://www.php.net/manual/en/datetime.formats.php). The resulting 
+  first two values will be used as the start and the end of a date range. The 
+  start and end date can be formatted with the `dateformat` option or set to 
   `unixtime`.
+
+- `TIMERANGE`: The requested value will be separated by a string referenced in
+  the `timerangeseparator` option. The two parts are used as integer values. 
+  The resulting first two values will be used as the start and the end hour of 
+  a time range.
 
 - `GEOCODE`: The requested value will be geocoded with Google Maps Geocoding
   (the API Key has to be set in the system settings). The distance from the

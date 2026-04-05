@@ -2,7 +2,7 @@
 
 # FilterWhere
 
-Filter resources with request parameters
+The powerful xPDO where clause generation for MODX
 
 ## Features
 
