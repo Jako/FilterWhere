@@ -221,7 +221,7 @@ The Snippet uses the following properties:
 | sortby        | JSON-encoded xPDO sortby clause to sort the resources. This sorting is used before the sorting of the request is added. | -       |
 | sortkey       | The name of a request key that is used to set the sort field.                                                           | -       |
 | toPlaceholder | If set, the snippet result will be assigned to this placeholder instead of outputting it directly.                      | -       |
-| varName       | Name of the superglobal variable that is searched for the filter values.                                                | REQUEST |
+| varName       | Name of the superglobal variable that is searched for the sortby values.                                                | REQUEST |
 
 #### Examples
 

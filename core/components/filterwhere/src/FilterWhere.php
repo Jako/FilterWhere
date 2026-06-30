@@ -39,7 +39,7 @@ class FilterWhere
      * The version
      * @var string $version
      */
-    public $version = '1.1.6';
+    public $version = '1.1.7';
 
     /**
      * The class options

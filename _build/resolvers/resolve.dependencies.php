@@ -2,7 +2,7 @@
 /**
  * Installs required dependencies packages
  *
- * @package agenda
+ * @package filterwhere
  * @subpackage build
  *
  * @var array $options
@@ -28,50 +28,50 @@ if ($object->xpdo) {
                 'service_url' => 'https://rest.modx.com/extras/',
             ]);
             if (!$provider) {
-                $modx->log(modX::LOG_LEVEL_ERROR, "Could not find MODX.com provider; can't install dependencies");
+                $modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find MODX.com provider; can't install dependencies");
             }
 
             foreach ($packages as $package_name => $version) {
-                $modx->log(modX::LOG_LEVEL_INFO, "Installing dependency <b>{$package_name}</b> v{$version} (or higher) …");
+                $modx->log(xPDO::LOG_LEVEL_INFO, "Installing dependency <b>$package_name</b> v$version (or higher) …");
 
                 $installed = $modx->getIterator('transport.modTransportPackage', [
                     'package_name' => $package_name,
-                    'installed:IS NOT' => NULL,
+                    'installed:IS NOT' => null,
                 ]);
                 /** @var modTransportPackage|\MODX\Revolution\Transport\modTransportPackage $package */
                 foreach ($installed as $package) {
-                    if ($package->compareVersion($version, '<=')) {
-                        $modx->log(modX::LOG_LEVEL_INFO, "- &check; {$package->get('signature')} already installed");
+                    if ($package->compareVersion($version)) {
+                        $modx->log(xPDO::LOG_LEVEL_INFO, "- &check; {$package->get('signature')} already installed");
                         continue(2);
                     }
                 }
 
                 $latest = $provider->latest($package_name, '>=' . $version);
                 if (count($latest) === 0) {
-                    $modx->log(modX::LOG_LEVEL_ERROR, "- Could not find <b>{$package_name} v{$version}+</b> in package provider {$provider->get('name')}");
+                    $modx->log(xPDO::LOG_LEVEL_ERROR, "- Could not find <b>$package_name v$version+</b> in package provider {$provider->get('name')}");
                     $success = false;
                     continue;
                 }
 
                 $latest = reset($latest);
-                $modx->log(modX::LOG_LEVEL_INFO, "- Downloading <b>{$latest['signature']}</b> from {$provider->get('name')}...");
+                $modx->log(xPDO::LOG_LEVEL_INFO, "- Downloading <b>{$latest['signature']}</b> from {$provider->get('name')}...");
                 $package = $provider->transfer($latest['signature']);
 
                 if (!$package) {
-                    $modx->log(modX::LOG_LEVEL_ERROR, "- Download failed :(");
+                    $modx->log(xPDO::LOG_LEVEL_ERROR, "- Download failed :(");
                     $success = false;
                     continue;
                 }
 
-                $modx->log(modX::LOG_LEVEL_WARN, "<b>--- Installing {$latest['signature']} ---</b>");
+                $modx->log(xPDO::LOG_LEVEL_WARN, "<b>--- Installing {$latest['signature']} ---</b>");
                 $stime = microtime(true);
                 $installSuccess = $package->install();
                 $ttime = microtime(true) - $stime;
 
                 if ($installSuccess) {
-                    $modx->log(modX::LOG_LEVEL_WARN, "<b>--- Installed {$latest['signature']} in " . number_format($ttime, 2) . "s ---</b>");
+                    $modx->log(xPDO::LOG_LEVEL_WARN, "<b>--- Installed {$latest['signature']} in " . number_format($ttime, 2) . "s ---</b>");
                 } else {
-                    $modx->log(modX::LOG_LEVEL_ERROR, "- Installation failed. Please refer to the log above for details.");
+                    $modx->log(xPDO::LOG_LEVEL_ERROR, "- Installation failed. Please refer to the log above for details.");
                     $success = false;
                 }
             }
