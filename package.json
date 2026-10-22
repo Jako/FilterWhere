@@ -1,16 +1,23 @@
 {
+  "fullname": "FilterWhere",
   "name": "filterwhere",
   "description": "Filter resources with request parameters\n",
   "author": "Thomas Jakobi <office@treehillstudio.com>",
   "private": true,
-  "devDependencies": {
-    "gulp": "^5.0.1",
-    "gulp-replace": "^1.1.4"
+  "version": "1.1.7",
+  "phpversion": "7.4",
+  "modxversion": "2.8",
+  "startYear": "2021",
+  "scripts": {
+    "build": "node build.js",
+    "build:bump": "node build.js bump"
   },
   "browserslist": [
-    "last 2 version",
     "> 1%",
-    "maintained node versions",
-    "not dead"
-  ]
+    "defaults"
+  ],
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "fsevents@2.3.3": true
+  }
 }
