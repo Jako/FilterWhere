@@ -124,7 +124,8 @@ class FilterGetResourcesWhereSnippet extends Snippet
         }
 
         if ($type == 'having') {
-            $output = ($where) ? '["' . str_replace(['[[', ']]'], ['[ [', '] ]'], trim(implode(' ', $where))) . '"]' : '';
+            // Encode the clause as JSON, because the quoted values can contain quotes and backslashes
+            $output = ($where) ? json_encode([str_replace(['[[', ']]'], ['[ [', '] ]'], trim(implode(' ', $where)))], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : '';
         } else {
             $output = str_replace(['[[', ']]'], ['[ [', '] ]'], json_encode($where));
         }
@@ -174,7 +175,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
             if (is_array($value)) {
                 if ($operator == '=' || $operator == 'IN') {
                     $having[] = "$junction $field IN (" . implode(',', array_map(function ($string) {
-                            return "'$string'";
+                            return $this->modx->quote((string)$string);
                         }, $value)) . ")";
                     $this->modx->setPlaceholder($option . '_value', json_encode($phValue));
                 } else {
@@ -218,7 +219,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      */
     private function havingLike(string $junction, string $field, string $operator, string $value): string
     {
-        return "$junction $field $operator '%$value%'";
+        return "$junction $field $operator " . $this->modx->quote('%' . $value . '%');
     }
 
     /**
@@ -371,7 +372,7 @@ class FilterGetResourcesWhereSnippet extends Snippet
      */
     private function havingValue(string $junction, string $field, string $operator, string $value): string
     {
-        return "$junction $field $operator '$value'";
+        return "$junction $field $operator " . $this->modx->quote($value);
     }
 
     /**
