@@ -29,6 +29,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ]);
         if (!$provider) {
             $modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find MODX.com provider; can't install dependencies");
+            $success = false;
+            break;
         }
 
         foreach ($packages as $package_name => $version) {
